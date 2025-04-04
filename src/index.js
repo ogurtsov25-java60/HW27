@@ -9,6 +9,9 @@ const playAgainElem = document.getElementById("play-again");
 const gameOverElem = document.getElementById("game-over");
 const coloredLettersElem = document.querySelector(".colored-letters");
 const attempts_number = document.querySelector(".attempts_number")
+const BtnGuess = document.querySelector(".guess")
+const result =document.querySelector(".result")
+
 let letterElems;
 //global variables
 let finishMessage;
@@ -31,16 +34,46 @@ function startGame() {
     word = getWord();
     tryels = 0;
     flOver = false;
-    allowedTryels = getAllowedTryels();
-    attempts_number.innerHTML = `Количество попыток:${allowedTryels}`
+    tryels = getAllowedTryels();
+    BtnGuess.disabled = true;
+    attempts_number.innerHTML = `Количество попыток:${tryels}`
     playAgainElem.style.display = "none";
     gameOverElem.innerHTML = "";
     inputWordElem.value = ""
     submitBtnElem.disabled = true;
     coloredLettersElem.innerHTML = getLetterDivs();
     letterElems = document.querySelectorAll(".letter")
+    backgroundLetters()
     
  
+}
+function openLetters(){
+    const wordArr = Array.from(word);
+    wordArr.forEach((l, i) => {
+        let background = 'white';
+        letterElems[i].innerHTML = l;
+        letterElems[i].style.background = background;
+    })
+}
+function backgroundLetters(){
+    const wordArr = Array.from(word);
+    wordArr.forEach((l, i) => {
+        let background = 'black';
+        letterElems[i].innerHTML = l;
+        letterElems[i].style.background = background;
+    })
+}
+function checkLetters(){
+    const wordArr = Array.from(word);
+
+    wordArr.forEach((l, i) => {
+        if (l==inputLetterElem.value){
+
+            letterElems[i].style.background = "white";
+        }
+        
+    })
+
 }
 function coloringLetters() {
     const wordArr = Array.from(guessedWord);
@@ -73,25 +106,34 @@ function onInput_letter() {
 function onSubmit(event) {
     event.preventDefault();
     guessedWord = inputWordElem.value;
-    tryels++;
-    coloringLetters();
-    const messageGameOver = isGameOver();
-    if(messageGameOver) {
-        finishMessage = messageGameOver;
+
+    // coloringLetters();
+    if (guessedWord==word){
+        result.innerHTML= "ПОБЕДА"
+
+    }
+    else{
+        result.innerHTML= "ПРОВАЛ"
+    }
+    openLetters();
+
+   
         finishGame();
     }
 
-}
+
 function onSubmit_letter(event) {
     event.preventDefault();
-    guessedWord = inputLetterElem.value;
-    tryels++;
-    coloringLetters();
-    const messageGameOver = isGameOver();
-    if(messageGameOver) {
-        finishMessage = messageGameOver;
-        finishGame();
+    tryels--;
+    attempts_number.innerHTML = `Количество попыток:${tryels}`
+    checkLetters();
+    
+    if(tryels==0) {
+        submitBtnLetter.disabled = true;
+        guess.disabled = false;
+        BtnGuess.disabled = false;
     }
+    
 
 }
 function isGameOver() {
@@ -102,6 +144,9 @@ function isGameOver() {
         res = "Unfortunatly you have used all tryels";
     }
     return res;
+}
+function guess(){
+    submitBtnElem.disabled = false;
 }
 function finishGame() {
     playAgainElem.style.display = "block";
