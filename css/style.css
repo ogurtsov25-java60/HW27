@@ -1,0 +1,57 @@
+body{
+    text-align: center;
+}
+header{
+    display:inline-block
+}
+.imgheader{
+    width: 150px;
+}
+.main {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -15vh;
+}
+.buttons {
+    margin-top: 1vh;
+}
+#submit-button {
+    margin-right: 2vw;
+}
+#play-again {
+    display: none;
+}
+.word-input {
+    font-size: 1.5rem;
+    width: 20vw;
+}
+.btn {
+    font-size: 1.3rem;
+}
+.logo {
+    font-size: 2.3rem;
+}
+.colored-letters{
+    margin-top: 10vh;
+    display: flex;
+
+}
+.letter {
+    width: 5vh;
+    height: 5vh;
+    border: 1px solid gray;
+    background-color: aliceblue;
+}
+.box{
+    display: flex;
+    margin-top: 40px;
+}
+.attempts_number{
+    margin-top:2rem;
+}
+.guess{
+    margin-top: 20px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href=".//css/style.css">
+</head>
+<body>
+    <header>
+        <img src="/image/istockphoto-147246163-612x612.jpg" class="imgheader">
+    </header>
+    <main class="main">
+        <section class="colored-letters">
+            <!-- here there will be colored letters of guessed word -->
+                    </section>
+        
+        <section class="input-section">
+            <form id="guess-word" onsubmit="onSubmit(event)">
+                <input class="word-input" name="word" oninput="onInput()" placeholder="enter word">
+                
+                <div class="buttons">
+                    <button class="btn" id="submit-button"  disabled>Submit</button>
+                    <button class="btn" type="reset">Reset</button>
+                </div>
+                <div class="attempts_number">"Количество попыток:____"</div>
+            </form>
+        </section>
+        <div class="box">
+            <form id="guess-letter" onsubmit="onSubmit_letter(event)">
+                <input class="letter-input" name="letter" oninput="onInput_letter()" placeholder="enter letter">
+                
+                <div class="buttons">
+                    <button class="btn" id="submit-button-letter"  disabled>Submit</button>
+                    <button class="btn" type="reset">Reset</button>
+                </div>
+            </form>
+    
+            <section class="game-status">
+                <p id="tryels"></p>
+                <p id="game-over"></p>
+                <button id="play-again" onclick="startGame()">Play Again</button>
+            </section>
+            
+
+        </div>
+        <button class="guess" id="guess" onclick="">УГАДАЙ</button>
+    </main>
+    
+
+
+
+    <script src="/src/index.js"></script>
+</body>
+</html>
