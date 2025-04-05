@@ -22,11 +22,9 @@ const questions = {
 "A scroll of parchment containing part of the text of the Shema prayer?":"mezuzah",
 "Israeli tank?":"merkava",
 "Israeli parliament?":"knesset",
-"Jewish holiday of Exodus?":"Passover"
+"Jewish holiday of Exodus?":"passover"
 }
-const words = [
-    "const", "script", "java", "cycle", "image", "variable"
-]
+
 let word;
 let questionsarr
 let guessedWord;
@@ -37,22 +35,15 @@ let flOver_letter= false;
 //functions 
 
 function getQuestion() {
-    const index = Math.floor(Math.random() * words.length);
+    const index = Math.floor(Math.random() * Object.keys(questions).length);
     const res = Object.entries(questions)[index];
     return res;
 }
 
-function getWord() {
-    const index = Math.floor(Math.random() * words.length);
-    const res = words[index];
-    return res;
-}
 function startGame() {
-    word = getWord();
     questionsarr = getQuestion()
     word = questionsarr[1];
     question.innerHTML = questionsarr[0];
-    tryels = 0;
     flOver = false;
     tryels = getAllowedTryels();
     BtnGuess.disabled = true;
@@ -107,7 +98,7 @@ function coloringLetters() {
     })
 }
 function getAllowedTryels() {
-    const res = Math.ceil(word.length * 0.30);
+    const res = Math.ceil(Object.keys(questions).length * 0.30);
     return res;
 }
 function getLetterDivs() {
@@ -121,7 +112,7 @@ function onInput() {
     submitBtnElem.disabled = inputWordElem.value.length !== word.length || flOver
 }
 function onInput_letter() {
-    submitBtnLetter.disabled = inputWordElem.value.length ===1 || flOver_letter
+    submitBtnLetter.disabled = inputWordElem.value.length === tryels|| flOver
 }
 function onSubmit(event) {
     event.preventDefault();
@@ -129,11 +120,11 @@ function onSubmit(event) {
 
     // coloringLetters();
     if (guessedWord==word){
-        result.innerHTML= "ПОБЕДА"
+        result.innerHTML= "WIN"
 
     }
     else{
-        result.innerHTML= "ПРОВАЛ"
+        result.innerHTML= "GAMEOVER"
     }
     openLetters();
 
@@ -170,7 +161,6 @@ function guess(){
 }
 function finishGame() {
     playAgainElem.style.display = "block";
-    gameOverElem.innerHTML = finishMessage;
     flOver = true;
     submitBtnElem.disabled = true;
 
