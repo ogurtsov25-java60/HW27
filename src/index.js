@@ -11,20 +11,37 @@ const coloredLettersElem = document.querySelector(".colored-letters");
 const attempts_number = document.querySelector(".attempts_number")
 const BtnGuess = document.querySelector(".guess")
 const result =document.querySelector(".result")
+const question = document.querySelector(".imgheader")
 
 let letterElems;
 //global variables
 let finishMessage;
+const questions = {
+"Hanukkah lamp?":"hanukkiah",
+"Lamp - symbol of Judaism?":"menorah",
+"A scroll of parchment containing part of the text of the Shema prayer?":"mezuzah",
+"Israeli tank?":"merkava",
+"Israeli parliament?":"knesset",
+"Jewish holiday of Exodus?":"Passover"
+}
 const words = [
     "const", "script", "java", "cycle", "image", "variable"
 ]
 let word;
+let questionsarr
 let guessedWord;
 let tryels;
 let allowedTryels;
 let flOver = false;
 let flOver_letter= false;
 //functions 
+
+function getQuestion() {
+    const index = Math.floor(Math.random() * words.length);
+    const res = Object.entries(questions)[index];
+    return res;
+}
+
 function getWord() {
     const index = Math.floor(Math.random() * words.length);
     const res = words[index];
@@ -32,6 +49,9 @@ function getWord() {
 }
 function startGame() {
     word = getWord();
+    questionsarr = getQuestion()
+    word = questionsarr[1];
+    question.innerHTML = questionsarr[0];
     tryels = 0;
     flOver = false;
     tryels = getAllowedTryels();
