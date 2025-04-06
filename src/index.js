@@ -1,8 +1,6 @@
-//References to DOM elements
+
 const submitBtnElem = document.getElementById("submit-button");
 const submitBtnLetter = document.getElementById("submit-button-letter");
-// const formElem = document.getElementById("guess-word");
-// const formElemLetter = document.getElementById("guess-letter")
 const inputWordElem = document.querySelector(".word-input");
 const inputLetterElem = document.querySelector(".letter-input")
 const playAgainElem = document.getElementById("play-again");
@@ -14,7 +12,6 @@ const result =document.querySelector(".result")
 const question = document.querySelector(".imgheader")
 
 let letterElems;
-//global variables
 let finishMessage;
 const questions = {
 "Hanukkah lamp?":"hanukkiah",
@@ -47,7 +44,7 @@ function startGame() {
     flOver = false;
     tryels = getAllowedTryels();
     BtnGuess.disabled = true;
-    attempts_number.innerHTML = `Количество попыток:${tryels}`
+    attempts_number.innerHTML = `Numbers of attempts:${tryels}`
     playAgainElem.style.display = "none";
     gameOverElem.innerHTML = "";
     inputWordElem.value = ""
@@ -86,17 +83,7 @@ function checkLetters(){
     })
 
 }
-function coloringLetters() {
-    const wordArr = Array.from(guessedWord);
-    wordArr.forEach((l, i) => {
-        let color = 'red';
-        if (word.includes(l)) {
-           color = guessedWord[i] == word[i] ? "green" : "yellow";
-        }
-        letterElems[i].innerHTML = l;
-        letterElems[i].style.color = color;
-    })
-}
+
 function getAllowedTryels() {
     const res = Math.ceil(Object.keys(questions).length * 0.30);
     return res;
@@ -118,7 +105,7 @@ function onSubmit(event) {
     event.preventDefault();
     guessedWord = inputWordElem.value;
 
-    // coloringLetters();
+
     if (guessedWord==word){
         result.innerHTML= "WIN"
 
@@ -136,9 +123,8 @@ function onSubmit(event) {
 function onSubmit_letter(event) {
     event.preventDefault();
     tryels--;
-    attempts_number.innerHTML = `Количество попыток:${tryels}`
-    checkLetters();
-    
+    attempts_number.innerHTML = `Numbers of attempts:${tryels}`
+    checkLetters(); 
     if(tryels==0) {
         submitBtnLetter.disabled = true;
         guess.disabled = false;
@@ -147,15 +133,7 @@ function onSubmit_letter(event) {
     
 
 }
-function isGameOver() {
-    let res = "";
-    if (word === guessedWord) {
-        res = `Congratulations. You are the winner with ${tryels} tryels`;
-    } else if (tryels === allowedTryels) {
-        res = "Unfortunatly you have used all tryels";
-    }
-    return res;
-}
+
 function guess(){
     submitBtnElem.disabled = false;
 }
@@ -165,5 +143,5 @@ function finishGame() {
     submitBtnElem.disabled = true;
 
 }
-//actions and event handlers definitions
+
 startGame();

@@ -5,7 +5,8 @@ header{
     display:inline-block
 }
 .imgheader{
-    width: 150px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size:xx-large;
 }
 .main {
     height: 70vh;
@@ -51,7 +52,12 @@ header{
 }
 .attempts_number{
     margin-top:2rem;
+    font-size: medium;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .guess{
     margin-top: 20px;
+}
+.play-again{
+    display: flex;
 }
